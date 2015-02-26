@@ -75,12 +75,12 @@ Then:
 make
 ```
 
-To flash the device, use openocd, with the STM32F4-Discovery config (for the f4discovery board)
+To flash the device, use openocd, with the STM32F4-Discovery configuration (for the f4discovery board):
 ```
 openocd -f /usr/share/openocd/scripts/board/stm32f4discovery.cfg
 ```
 
-The openocd daemon is now listening, on another term, start a telnet session:
+The openocd daemon is now listening. On another terminal, start a telnet session:
 ```
 $ telnet localhost 4444
 > reset halt
