@@ -20,7 +20,7 @@ java -jar SetupSTM32CubeMX-4.6.0.exe
 java -jar /usr/local/STMicroelectronics/STM32Cube/STM32CubeMX/STM32CubeMX.exe
 ```
 
-## Using STM32CubeF4 ##
+## STM32CubeF4 ##
 
   * [Get the sources](http://www.st.com/web/catalog/tools/FM147/CL1794/SC961/SS1743/PF259243#). Download it, extract it and copy in your favorite folder (eg. /opt/).
   * Documentation
