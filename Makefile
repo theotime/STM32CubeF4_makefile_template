@@ -6,11 +6,15 @@ SRCS += startup_stm32f407xx.s
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=main
 
-#######################################################################################
-
+# Path
 STM_COMMON=/opt/STM32Cube_FW_F4_V1.4.0
+
+# Board/MCU
 STM_SERIE=STM32F4XX
 STM_MODEL=STM32F407xx
+BSP_MODEL=STM32F4-Discovery
+
+#######################################################################################
 
 export STM_COMMON
 export STM_SERIE
@@ -29,7 +33,11 @@ CFLAGS += -I.
 # Include files from STM libraries
 CFLAGS += -I$(STM_COMMON)/Drivers/CMSIS/Include
 CFLAGS += -I$(STM_COMMON)/Drivers/STM32F4xx_HAL_Driver/Inc
-CFLAGS += -I$(STM_COMMON)/Drivers/CMSIS/Device/ST/STM32F4xx/Include/ 
+CFLAGS += -I$(STM_COMMON)/Drivers/CMSIS/Device/ST/STM32F4xx/Include/
+
+#BSP 
+CFLAGS += -I$(STM_COMMON)/Drivers/BSP/$(BSP_MODEL)
+vpath %.c $(STM_COMMON)/Drivers/BSP/$(BSP_MODEL)
 
 OBJS = $(SRCS:.c=.o)
 

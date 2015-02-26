@@ -6,7 +6,7 @@ STM32F4-DISCOVERY Makefile template for linux. Should work for other board.
 ```
 sudo add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 sudo apt-get update
-sudo apt-get -y install gcc-arm-none-eabi gdb-arm-none-eabi binutils-arm-none-eabi
+sudo apt-get -y install gcc-arm-none-eabi gdb-arm-none-eabi binutils-arm-none-eabi openocd
 ```
 
 ## STM32CubeMX ##
@@ -28,6 +28,7 @@ java -jar /usr/local/STMicroelectronics/STM32Cube/STM32CubeMX/STM32CubeMX.exe
     * [UM1472 - Discovery kit for STM32F407/417 lines](http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00039084.pdf)
     * [UM1725 - Description of STM32F4xx HAL drivers](http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105879.pdf)
     * [PM0214 - STM32F3 and STM32F4 Series Cortex®-M4 programming manual](http://www.st.com/web/en/resource/technical/document/programming_manual/DM00046982.pdf)
+    * [RM0090 - STM32F405xx/07xx, STM32F415xx/17xx, STM32F42xxx and STM32F43xxx advanced ARM®-based 32-bit MCUs](http://www.st.com/web/en/resource/technical/document/reference_manual/DM00031020.pdf)
     * BSP : STM32Cube_FW_F4_V1.4.0/Drivers/BSP/STM32F4-Discovery/
 ```
 debian@debian:/opt/STM32Cube_FW_F4_V1.4.0/Drivers/BSP/STM32F4-Discovery$ ls *.h
@@ -44,16 +45,48 @@ stm32f4_discovery_audio.h
     * /opt/STM32Cube_FW_F4_V1.4.0/Projects/STM32F4-Discovery/Templates/Src
     * /opt/STM32Cube_FW_F4_V1.4.0/Projects/STM32F4-Discovery/Templates/Inc
     
-Change the path & information for your board into the Makefile
+Change the sources, path & informations for your board into the Makefile
 ```
+SRCS=main.c stm32f4xx_it.c stm32f4xx_hal_msp.c system_stm32f4xx.c
+SRCS += startup_stm32f407xx.s
+
+# Binaries will be generated with this name (.elf, .bin, .hex, etc)
+PROJ_NAME=main
+
+# Path
 STM_COMMON=/opt/STM32Cube_FW_F4_V1.4.0
+
+# Board/MCU
 STM_SERIE=STM32F4XX
 STM_MODEL=STM32F407xx
+BSP_MODEL=STM32F4-Discovery
 ```
+
+For some examples, the GPIO_EXTI ig, you should add specific BSP files : 
+```
+SRCS += stm32f4_discovery.c # LEDs, Button
+SRCS += stm32f4_discovery_accelerometer.c # Accelerometer
+SRCS += stm32f4_discovery_audio.c # Audio
+```
+
 
 Then:
 ```
 make
+```
+
+To flash the device, use openocd, with the STM32F4-Discovery config (for the f4discovery board)
+```
+openocd -f /usr/share/openocd/scripts/board/stm32f4discovery.cfg
+```
+
+The openocd daemon is now listening, on another term, start a telnet session:
+```
+$ telnet localhost 4444
+> reset halt
+> flash write_image erase main.hex
+> reset run
+> shutdown
 ```
 
 
