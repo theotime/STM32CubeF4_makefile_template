@@ -95,7 +95,7 @@ $ telnet localhost 4444
 If you installed [st-link](https://github.com/texane/stlink), to flash you can also use:
 ```
 $ make burn
-or (if you haven't configured your udb=
+or 
 $ sudo make burn
 ```
 
