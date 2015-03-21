@@ -92,5 +92,11 @@ $ telnet localhost 4444
 > shutdown
 ```
 
+If you installed [st-link](https://github.com/texane/stlink), to flash you can also use:
+```
+$ make burn
+or (if you haven't configured your udb=
+$ sudo make burn
+```
 
 Project based on [tomvdb's work](https://github.com/tomvdb/stm32f401-nucleo-basic-template)

@@ -67,3 +67,5 @@ clean:
 	rm -f $(PROJ_NAME).bin
 	$(MAKE) -C $(LIBS) clean
 
+burn:
+	st-flash write $(PROJ_NAME).bin 0x8000000
