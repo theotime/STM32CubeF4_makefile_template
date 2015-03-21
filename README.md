@@ -60,6 +60,9 @@ STM_COMMON=/opt/STM32Cube_FW_F4_V1.4.0
 STM_SERIE=STM32F4XX
 STM_MODEL=STM32F407xx
 BSP_MODEL=STM32F4-Discovery
+
+# Linker
+LINK=STM32F407VG_FLASH.ld
 ```
 
 For some examples, the GPIO_EXTI ig, you should add specific BSP files : 

@@ -14,6 +14,9 @@ STM_SERIE=STM32F4XX
 STM_MODEL=STM32F407xx
 BSP_MODEL=STM32F4-Discovery
 
+# Linker
+LINK=STM32F407VG_FLASH.ld
+
 #######################################################################################
 
 export STM_COMMON
@@ -23,7 +26,7 @@ export STM_MODEL
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -O2 -Wall -TSTM32F407VG_FLASH.ld 
+CFLAGS  = -g -O2 -Wall -T$(LINK)
 CFLAGS += -DUSE_STDPERIPH_DRIVER -D$(STM_SERIE) -D$(STM_MODEL)
 CFLAGS += --specs=nosys.specs
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
